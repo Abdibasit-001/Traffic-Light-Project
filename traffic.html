@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Traffic Lights</title>
+    <link rel="stylesheet" href="/traffic.css">
+
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #6d6767;
+    }
+    
+    .traffic-light {
+        background-color: black;
+        width: 80px;
+        height: 200px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        padding: 15px;
+        gap: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .light {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: gray;
+        opacity: 0.3;
+        transition: opacity 1s ease, background-color 1s ease
+    }
+    
+    .light.active {
+        opacity: 1;
+    }
+    
+    .red {
+        background-color: red;
+    }
+    
+    .yellow {
+        background-color: yellow;
+    }
+    
+    .green {
+        background-color: green;
+    }
+    
+    .message {
+        font-size: 40px;
+        color: rgb(7, 5, 5);
+        position: absolute;
+        margin-top: 280px;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+
+    <div class="traffic-light">
+        <div class="light red"></div>
+        <div class="light yellow"></div>
+        <div class="light green"></div>
+
+
+    </div>
+    <div class="message"></div>
+
+    <script>
+        const lights = document.querySelectorAll('.light');
+        const message = document.querySelector('.message');
+        let currentLight = 0;
+
+        const messages = {
+            red: "STOP",
+            yellow: "WAIT",
+            green: "GO",
+        };
+
+        function changeLight() {
+            currentLight = (currentLight + 1) % lights.length;
+            lights.forEach((light, index) => {
+                light.classList.remove('active');
+                if (index === currentLight) {
+                    light.classList.add('active');
+                    const lightColor = light.classList[1];
+                    message.textContent = messages[lightColor];
+                }
+            });
+        }
+
+
+        //setInterval(changeLight, 2000);
+    </script>
+
+</body>
+
+</html>
